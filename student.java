@@ -1,11 +1,9 @@
 public class student extends Setuser implements user {
     private String password;
-    boolean login = false;
     String name;
     public boolean login(String s,int ID,String password,database d){
-        if(s.equals(password)){
-            return d.data(ID);
-        }
+        String p = d.data(ID,"students");
+        if(p.equals(s)) return true;
         return false;
     }
     public void setPassword(String s){

@@ -48,9 +48,9 @@ public class assignment1 {
             }
             else if(c==3){
                 student s = new student();
-                sc.next();
+                //sc.next();
                 System.out.println("Enter name of student : ");
-                s.name = sc.nextLine();
+                s.name = sc.next();
                 System.out.println("Enter password : ");
                 s.setPassword(sc.next());
                 s.register(d);
@@ -65,6 +65,24 @@ public class assignment1 {
                 int ID = sc.nextInt();
                 System.out.println("Enter password to login: ");
                 String s = sc.next();
+                if(a.login(s,ID,s,d)){
+                    System.out.println("Choose Admin Operations: ");
+                    System.out.println("--> 1. Add Course\n--> 2. Show Complains of All Students with ID");
+                    int c2 = sc.nextInt();
+                    if(c2==1){
+                        System.out.print("--> Enter Course ID: ");
+                        String cid = sc.next();
+                        System.out.print("--> Enter Course Name: ");
+                        String name = sc.next();
+                        System.out.print("--> Enter credits: ");
+                        int credit = sc.nextInt();
+                        d.addCourse(cid,name,credit);
+                    }
+                    else if(c2==2){
+                        System.out.println("-->All complaints submitted by students are: ");
+                        d.showComplaints();
+                    }
+                }
             }
             else if(c3==2){
                 professor p = new professor();
@@ -72,7 +90,7 @@ public class assignment1 {
                 int ID = sc.nextInt();
                 System.out.println("Enter password to login: ");
                 String s = sc.next();
-                if(p.login(s, ID, s, d)){
+                if(p.login(s, ID, null, d)){
                     System.out.println("Enter opertion to perform: ");
                     System.out.println("1. Show Syllabus\n2. Update Syllabus");
                     int c2 = sc.nextInt();
@@ -90,6 +108,37 @@ public class assignment1 {
                 }
                 else{
                     System.out.println("WRONG LOGIN CREDENTIALS");
+                }
+            }
+            else if(c3==3){
+                System.out.print("--> Enter ID of Student to login: ");
+                int ID = sc.nextInt();
+                System.out.print("--> Enter password: ");
+                String s = sc.next();
+                student s1 = new student();
+                if(s1.login(s, ID, s, d)){
+                    System.out.println("Student successfully logged in.");
+                    System.out.println("Enter operations to do: \n--> 1. Submit complain\n--> 2. View courses\n--> 3. Register courses");
+                    int c2 = sc.nextInt();
+                    if(c2==1){
+                        System.out.println("Enter your complain: ");
+                        sc.next();
+                        String complain = sc.next();
+                        d.addComplain(complain,ID);
+                    }
+                    else if(c2==2){
+                        System.out.println("Available Courses are: ");
+                        
+                        d.displayCourses();
+                    }
+                    else if(c2==3){
+                        System.out.println("Enter course ID to register: ");
+                        String cid = sc.next();
+                        d.registerCourse(cid,ID);
+                    }
+                    else{
+                        System.out.println("WRONG LOGIN CREDENTIALS.");
+                    }
                 }
             }
         }
