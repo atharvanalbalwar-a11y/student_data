@@ -1,0 +1,5 @@
+javac -cp ".;mysql.jar" assignment1.java database.java
+
+java -cp ".;mysql.jar" assignment1
+
+do these on command prompt
