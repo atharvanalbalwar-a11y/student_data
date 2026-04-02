@@ -5,7 +5,7 @@ public class admin extends Setuser implements user{
     
     public boolean login(String s,int ID,String password,database d){
         String p = d.data(ID,"admins");
-        if(s.equals(this.password) && this.password.equals(s)) return true;
+        if(s.equals(this.password) && this.password.equals(p)) return true;
         return false;
     }
     public void register(database d,String p){

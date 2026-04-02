@@ -145,7 +145,7 @@ public class database {
         }
     }
     public void registerCourse(String cid,int ID){
-        String sql = "UPDATE students SET Course = ? WHERE ID = "+ID;
+        String sql = "UPDATE students SET Courses = ? WHERE ID = "+ID;
         try (Connection conn = getconnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
         
@@ -179,7 +179,7 @@ public class database {
         }     
     }
     public void showComplaints(){
-        String sql = "SELECT Complaint FROM students";
+        String sql = "SELECT ID,Complaint FROM students";
         try (Connection conn = getconnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery()){
@@ -189,6 +189,52 @@ public class database {
                 int id = rs.getInt("ID");
                 String complaint = rs.getString("Complaint");
                 System.out.println(id+"\t||\t"+complaint);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void deleteStudentRecord(int id){
+        String sql = "DELETE FROM students WHERE ID = "+id;
+        try (Connection conn = getconnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);){
+            int rd = pstmt.executeUpdate();
+            if(rd==1){
+                System.out.println("------------RECORD DELETED SUCCESSFULLY----------");
+            }
+            else{
+                System.out.println("-----------ERROR OCCURRED WHILE DELETING----------");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }  
+    }
+    public void showInfo(String user,int ID){
+        String sql = "SELECT * FROM "+user+" WHERE ID = "+ID;
+        try(Connection conn = getconnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();){
+            if(!rs.next()) return;
+            String name = rs.getString("NAME");
+            String password = rs.getString("passwords");
+            if(user.equals("students")){
+                String courses = rs.getString("Courses");
+                System.out.println("ID\t||\tName\t||\tPassword\t||\tCourse Registered");
+                System.out.println(ID+"\t||\t"+name+"\t||\t"+password+"\t\t||\t"+courses);
+                return;
+            }
+            else if(user.equals("admins")){
+                System.out.println("ID\t||\tName\t||\tPassword");
+                System.out.println(ID+"\t||\t"+name+"\t||\t"+password);
+                return;
+            }
+            else if(user.equals("professor")){
+                String syllabus = rs.getString("Syllabus");
+                System.out.println("ID\t||\tName\t||\tPassword\t||\tSyllabus");
+                System.out.println(ID+"\t||\t"+name+"\t||\t"+password+"\t\t||\t"+syllabus);
+                return;
             }
         }
         catch(SQLException e){
