@@ -3,7 +3,6 @@ import java.util.Scanner;
 interface user {
     public boolean login(String s,int ID,String password,database d);
 }
-
 class Setuser {
     int ID;
     Setuser getUser(String s){
