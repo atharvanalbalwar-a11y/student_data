@@ -21,6 +21,7 @@ public class assignment1 {
         Scanner sc = new Scanner(System.in);
         choice = sc.nextInt();
         database d = new database();
+        while(choice!=0){
         if(choice==1){
             System.out.println();
             System.out.println("Enter type of user :\n--> 1. Admin\n--> 2. Professor\n--> 3. Student");
@@ -60,6 +61,7 @@ public class assignment1 {
                 System.out.print("Enter password to login: ");
                 String s = sc.next();
                 if(a.login(s,ID,s,d)){
+                    System.out.println("\n----------------===: SUCCESSFULLY LOGGED IN :===----------------\n");
                     System.out.println("Choose Admin Operations: ");
                     System.out.println("--> 1. Add Course\n--> 2. Show Complains of All Students with ID\n--> 3. Remove record of student\n--> 4. Show Profile information");
                     int c2 = sc.nextInt();
@@ -91,11 +93,12 @@ public class assignment1 {
             }
             else if(c3==2){
                 professor p = new professor();
-                System.out.println("Enter ID of professor: ");
+                System.out.print("Enter ID of professor: ");
                 int ID = sc.nextInt();
-                System.out.println("Enter password to login: ");
+                System.out.print("Enter password to login: ");
                 String s = sc.next();
                 if(p.login(s, ID, null, d)){
+                    System.out.println("\n----------------===: SUCCESSFULLY LOGGED IN :===----------------\n");
                     System.out.println("Enter opertion to perform: ");
                     System.out.println("--> 1. Show Syllabus\n--> 2. Update Syllabus\n--> 3. Show profile information");
                     int c2 = sc.nextInt();
@@ -124,7 +127,7 @@ public class assignment1 {
                 String s = sc.next();
                 student s1 = new student();
                 if(s1.login(s, ID, s, d)){
-                    System.out.println("Student successfully logged in.");
+                    System.out.println("\n--------------===: Student successfully logged in :===------------------\n");
                     System.out.println("Enter operations to do: \n--> 1. Submit complain\n--> 2. View courses\n--> 3. Register courses\n--> 4. Show Profile Information");
                     int c2 = sc.nextInt();
                     if(c2==1){
@@ -152,6 +155,11 @@ public class assignment1 {
                 }
             }
         }
+        System.out.println("Enter operation to perform : ");
+        System.out.println("--> 1. Register new user\n--> 2. Login registered user\n--> 0. to exit");
+        choice = sc.nextInt();
+    }
         sc.close();
+        System.out.println("---------------====: EXITED SUCCESSFULLY :====-----------------");
     }
 }

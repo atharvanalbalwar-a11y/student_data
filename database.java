@@ -81,9 +81,9 @@ public class database {
         ResultSet rs = pstmt.executeQuery();
 
         if(rs.next()){
-            // Map the database columns to a Java Object
+            System.out.println("--------------------------------------------------------");
             System.out.println("ID\t||\tNAME\t||\tSyllabus");
-            System.out.println("----------------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
             System.out.print(rs.getInt("ID")+"\t||\t");
             System.out.print(rs.getString("NAME")+"\t||\t"); 
             System.out.println(rs.getString("Syllabus"));        
@@ -131,6 +131,7 @@ public class database {
         try (Connection conn = getconnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery()){
+            System.out.println("---------------------------------------------------------");
             System.out.println("Course ID\t||\tCourse name\t||\tCredits");
             System.out.println("---------------------------------------------------------");
             while (rs.next()) {
@@ -183,6 +184,7 @@ public class database {
         try (Connection conn = getconnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery()){
+            System.out.println("---------------------------------------------------");
             System.out.println("ID\t||\tComplaints");
             System.out.println("---------------------------------------------------");
             while (rs.next()) {
@@ -221,19 +223,29 @@ public class database {
             String password = rs.getString("passwords");
             if(user.equals("students")){
                 String courses = rs.getString("Courses");
+                System.out.println("---------------------------------------------------------------------------");
                 System.out.println("ID\t||\tName\t||\tPassword\t||\tCourse Registered");
+                System.out.println("---------------------------------------------------------------------------");
                 System.out.println(ID+"\t||\t"+name+"\t||\t"+password+"\t\t||\t"+courses);
+                System.out.println("---------------------------------------------------------------------------");
                 return;
             }
             else if(user.equals("admins")){
+                System.out.println("-----------------------------------------------------------------");
                 System.out.println("ID\t||\tName\t||\tPassword");
+                System.out.println("-----------------------------------------------------------------");
                 System.out.println(ID+"\t||\t"+name+"\t||\t"+password);
+                System.out.println("-----------------------------------------------------------------");
                 return;
             }
             else if(user.equals("professor")){
+
                 String syllabus = rs.getString("Syllabus");
+                System.out.println("---------------------------------------------------------------------");
                 System.out.println("ID\t||\tName\t||\tPassword\t||\tSyllabus");
+                System.out.println("---------------------------------------------------------------------");
                 System.out.println(ID+"\t||\t"+name+"\t||\t"+password+"\t\t||\t"+syllabus);
+                System.out.println("---------------------------------------------------------------------");
                 return;
             }
         }
